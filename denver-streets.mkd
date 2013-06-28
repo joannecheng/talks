@@ -5,7 +5,7 @@ they can be a surprise to commuters every time they step out into the road.
 The city of Denver tries to help out its citizens by releasing street closures in advance. Unfortunately,
 this data is locked: in order to find street closures on your commute, you must manually search for street names by
 digging through a PDF file that's released every two weeks 
-(http://www.denvergov.org/StreetsandSidewalks/StreetMaintenanceandImprovement/WeeklyRoadLaneClosures/tabid/440698/Default.aspx).
+(http://www.denvergov.org/streetclosures).
 
 I've been working on a solution through Code for Communities that makes it easier to search for street
 closures in Denver. The application takes the PDFs that's released by Denver and turns them into a robust 
