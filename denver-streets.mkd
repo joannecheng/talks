@@ -9,7 +9,7 @@ digging through a PDF file that's released every two weeks
 
 I've been working on a [solution](https://github.com/colorado-code-for-communities/denver_streets) 
 through [Colorado Code for Communities](http://codeforcommunities.org/) 
-that makes it much, much easier for users to search for street closures in Denver. The application scrapes the PDFs that's 
+that makes it much, much easier for users to search for street closures in Denver. The application scrapes the PDFs 
 released by the Denver website and turns them into a robust application interface for other developers 
 to integrate their own apps. I want to explain the steps that this application takes to turn PDFs into queryable 
 location data and show some example applications using this API that can benefit the Denver community. 
