@@ -3,7 +3,11 @@
 Fact: street closures are a major inconvienence. While they're planned a good amount of time in advance, 
 they can be a surprise to commuters every time they step out into the road.
 The city of Denver announces street closures in advance by releasing a PDF report every two weeks. Unfortunately,
-this data is locked: in order to find street closures on your commute, you must manually search for street names.
+this data is locked: in order to find street closures on your commute, you must manually search for street names by
+digging through PDF files.
 
-I've been working on a solution through Code for Communities that makes it easier to search and display street
-closures in Denver.
+I've been working on a solution through Code for Communities that makes it easier to search for street
+closures in Denver. The application takes the PDFs that's released by Denver and turns them into a robust 
+interface for developers to take and integrate with their own applications. I would like to explain 
+the steps that this application takes turn PDFs into queryable location data and show some simple uses of 
+this application that will benefit the Denver community.
