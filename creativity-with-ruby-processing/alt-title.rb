@@ -9,8 +9,6 @@ class Title < Processing::App
    textAlign(CENTER, CENTER)
    textFont(font)
 
-   @ruby_shape = load_shape("ruby.svg")
-
    @circle_count = 120
    @circles = []
 
