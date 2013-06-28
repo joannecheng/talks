@@ -1,1 +1,9 @@
-*Denver Streets
+## Denver Streets
+
+Fact: street closures are a major inconvienence. While they're planned a good amount of time in advance, 
+they can be a surprise to commuters every time they step out into the road.
+The city of Denver announces street closures in advance by releasing a PDF report every two weeks. Unfortunately,
+this data is locked: in order to find street closures on your commute, you must manually search for street names.
+
+I've been working on a solution through Code for Communities that makes it easier to search and display street
+closures in Denver.
