@@ -3,7 +3,7 @@
 Fact: street closures are a major inconvienence. While they're planned a good amount of time in advance, 
 they can be a surprise to commuters every time they step out into the road.
 The city of Denver tries to help out its citizens by releasing street closures in advance, but unfortunately,
-this data is locked. In order to find street closures on a commute, a user must manually search for street names by
+this data is in a locked format. In order to find street closures on a commute, a user must manually search for street names by
 digging through a PDF file that's released every two weeks 
 (http://www.denvergov.org/streetclosures).
 
