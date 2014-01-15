@@ -91,7 +91,7 @@ class HealthcareSlopegraph
     @gdpYScale ||=  d3.scale.linear().domain(range).range([@lineHeight*3, 800])
 
 d3.csv 'data/2011_life_expectancy_vs_health_care_spending.csv', (data) ->
-  svg = d3.select('.graph')
+  svg = d3.select('.slopegraph')
     .append('svg')
     .attr('height', 850)
     .append('g')
