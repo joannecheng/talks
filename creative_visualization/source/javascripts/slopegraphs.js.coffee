@@ -5,10 +5,21 @@ class HealthcareSlopegraph
     @initialYPos = @maxHeight/4
 
   draw: =>
+    @_drawColumnLabels()
     @_drawCountryList()
     @_drawLifeExpectancy()
     @_drawPercentGDP()
     @_drawLines()
+
+  _drawColumnLabels: ->
+    columnLabels = ['Country', 'Avg Life Expectancy', '% GDP Spent on Healthcare']
+    columnPosition = [10, 150, 400]
+    for c, i in columnLabels
+      @svg.append('text')
+        .attr('x', columnPosition[i])
+        .attr('y', @lineHeight)
+        .text(c)
+        .classed('table-header', true)
 
   _drawCountryList: ->
     @svg.selectAll('text.country-name')
@@ -30,12 +41,13 @@ class HealthcareSlopegraph
 
   _drawPercentGDP: ->
     existingPos = []
+    maxBoundary = 0.3
     @svg.selectAll('text.percent-gdp')
       .data(@_percentGDPCondensed()).enter()
       .append('text')
       .attr('x', 400)
       .text((d) =>
-        if _.find(existingPos, (currentGDP) => d < currentGDP + 0.2 && d > currentGDP - 0.2)
+        if _.find(existingPos, (currentGDP) => d < currentGDP + maxBoundary && d > currentGDP - maxBoundary)
           return null
 
         existingPos.push(d)
@@ -51,7 +63,7 @@ class HealthcareSlopegraph
       .attr('x1', 200)
       .attr('x2', 390)
       .attr('y1', (d, i) => i * @lineHeight + @initialYPos)
-      .attr('y2', (d) => @_findGDPPosition(d) - 6)
+      .attr('y2', (d) => @_findGDPPosition(d) - @lineHeight/2)
       .attr('stroke', 'black')
       .classed('slopelines', true)
 
@@ -76,7 +88,7 @@ class HealthcareSlopegraph
 
   _percentGDPScale: ->
     range = d3.extent(@data, (d) -> parseFloat d['percent gdp on health']).reverse()
-    @gdpYScale ||=  d3.scale.linear().domain(range).range([12, 800])
+    @gdpYScale ||=  d3.scale.linear().domain(range).range([@lineHeight*3, 800])
 
 d3.csv 'data/2011_life_expectancy_vs_health_care_spending.csv', (data) ->
   svg = d3.select('.graph')
