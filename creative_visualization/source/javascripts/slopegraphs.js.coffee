@@ -1,5 +1,7 @@
 class HealthcareSlopegraph
+  maxHeight: 800
   constructor: (@data, @svg) ->
+    @initialYPos = @maxHeight/4
 
   draw: =>
     @_drawCountryList()
@@ -12,7 +14,7 @@ class HealthcareSlopegraph
       .data(@_sortByLifeExpectancy()).enter()
       .append('text')
       .attr('x', 10)
-      .attr('y', (d, i) -> i * 14 + 12)
+      .attr('y', (d, i) => i * 14 + @initialYPos)
       .text((d) -> d.country)
       .classed('country-name', true)
 
@@ -21,8 +23,8 @@ class HealthcareSlopegraph
       .data(@_sortByLifeExpectancy()).enter()
       .append('text')
       .attr('x', 150)
-      .attr('y', (d, i) -> i * 14 + 12)
-      .text((d) -> d['life expectancy'])
+      .attr('y', (d, i) => i * 14 + @initialYPos)
+      .text((d, i) -> d['life expectancy'])
       .classed('life-expectancy', true)
 
   _drawPercentGDP: ->
@@ -30,8 +32,10 @@ class HealthcareSlopegraph
       .data(@_sortByPercentGDP()).enter()
       .append('text')
       .attr('x', 400)
-      .attr('y', (d, i) -> i * 14 + 12)
-      .text((d) -> d['percent gdp on health'])
+      .attr('y', (d) => @_percentGDPScale()(d['percent gdp on health']))
+      .text((d, i) ->
+        percentGDP = d['percent gdp on health']
+      )
       .classed('percent-gdp', true)
 
   _drawLines: =>
@@ -40,14 +44,13 @@ class HealthcareSlopegraph
       .append('line')
       .attr('x1', 200)
       .attr('x2', 390)
-      .attr('y1', (d, i) -> i * 14 + 6)
-      .attr('y2', (d) =>
-        @_findGDPPosition(d) * 14 + 6)
+      .attr('y1', (d, i) => i * 14 + @initialYPos)
+      .attr('y2', (d) => @_findGDPPosition(d) - 6)
       .attr('stroke', 'black')
       .classed('slopelines', true)
 
   _findGDPPosition: (d) =>
-    _.indexOf(@_sortByPercentGDP(), d)
+    @_percentGDPScale()(d['percent gdp on health'])
 
   _sortByLifeExpectancy: ->
     @sortedByLifeExpectancy ||= _.sortBy @data, (d) ->
@@ -59,9 +62,14 @@ class HealthcareSlopegraph
       parseFloat d['percent gdp on health']
     _.clone(@sortedByPercentGDP).reverse()
 
+  _percentGDPScale: ->
+    range = d3.extent(@data, (d) -> parseFloat d['percent gdp on health']).reverse()
+    @gdpYScale ||=  d3.scale.linear().domain(range).range([12, 800])
+
 d3.csv 'data/2011_life_expectancy_vs_health_care_spending.csv', (data) ->
   svg = d3.select('.graph')
     .append('svg')
+    .attr('height', 800)
     .append('g')
 
   slopegraph = new HealthcareSlopegraph(data, svg)
